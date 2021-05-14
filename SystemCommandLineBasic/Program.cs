@@ -24,10 +24,4 @@ namespace SystemCommandLineBasic
             Console.WriteLine($"Building using Profile={arguments.Configuration} and Publish={arguments.Publish}");
         }
     }
-
-    class Arguments
-    {
-        public string Configuration { get; set; }
-        public bool Publish { get; set; }
-    }
 }
