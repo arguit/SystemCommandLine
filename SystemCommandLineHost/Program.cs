@@ -1,8 +1,11 @@
 ﻿using System;
 using System.CommandLine;
 using System.CommandLine.Invocation;
+using System.CommandLine.Parsing;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
-namespace SystemCommandLineBasic
+namespace SystemCommandLineHost
 {
     class Program
     {
@@ -19,15 +22,15 @@ namespace SystemCommandLineBasic
             rootCommand.Invoke(args);
         }
 
-        static void Run(Arguments arguments)
-        {
-            Console.WriteLine($"Building using Profile={arguments.Configuration} and Publish={arguments.Publish}");
-        }
-    }
+        static void Run(Arguments arguments) =>
+            Host.CreateDefaultBuilder()
+                .ConfigureServices((hostContext, services) =>
+                {
+                    services.AddSingleton<Arguments>(arguments);
+                    services.AddHostedService<Worker>();
+                })
+                .Build()
+                .Run();
 
-    class Arguments
-    {
-        public string Configuration { get; set; }
-        public bool Publish { get; set; }
     }
 }
