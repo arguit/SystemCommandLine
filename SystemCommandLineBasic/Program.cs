@@ -16,7 +16,7 @@ namespace SystemCommandLineBasic
 
             rootCommand.Description = $"{nameof(SystemCommandLineBasic)}";
             rootCommand.Handler = CommandHandler.Create<string, bool>(Execute);
-            rootCommand.InvokeAsync(args);
+            rootCommand.Invoke(args);
         }
 
         static void Execute(string configuration, bool publish)
