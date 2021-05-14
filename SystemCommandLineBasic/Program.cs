@@ -14,7 +14,7 @@ namespace SystemCommandLineBasic
                 new Option<bool>(new [] { "-p", "--publish" }, "Publish after build"),
             };
 
-            rootCommand.Description = $"{nameof(SystemCommandLineBasic)}";
+            rootCommand.Description = $"Test appliacation to learn basics of System.CommandLine";
             rootCommand.Handler = CommandHandler.Create<string, bool>(Execute);
             rootCommand.Invoke(args);
         }
