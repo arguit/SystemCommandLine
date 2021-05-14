@@ -9,23 +9,13 @@ namespace SystemCommandLineBasic
         static void Main(string[] args)
         {
             var rootCommand = new RootCommand
-            {                
-                new Option<string>(
-                    aliases: new string[] { "--configuration", "-c"},
-                    getDefaultValue: () => "Release-Dev",
-                    description: "Name of build profile to be used"
-                ),
-                new Option<bool>(
-                    aliases: new string[] { "--publish", "-p" },
-                    getDefaultValue: () => false,
-                    description: "Set to publish after build"
-                )
+            {
+                new Option<string>(new [] { "-c", "--configuration" },"Name of build configuration"),
+                new Option<bool>(new [] { "-p", "--publish" }, "Publish after build"),
             };
 
             rootCommand.Description = $"{nameof(SystemCommandLineBasic)}";
-
             rootCommand.Handler = CommandHandler.Create<string, bool>(Execute);
-
             rootCommand.InvokeAsync(args);
         }
 
